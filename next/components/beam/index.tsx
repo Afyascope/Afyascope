@@ -1,7 +1,7 @@
 "use client";
-import React, { useEffect, useRef } from "react";
-import styles from "./styles.module.css";
 import { cn } from "@/lib/utils";
+import React, { useEffect, useRef } from "react";
+import styles from "./styles.module.css"; // Ensure this file exists as discussed before
 
 const Beam = ({
   showBeam = true,
@@ -36,7 +36,6 @@ const Beam = ({
       meteor.addEventListener("animationstart", handleAnimationStart);
 
       return () => {
-        // Using the same meteor variable captured in the effect
         meteor.removeEventListener("animationend", handleAnimationEnd);
         meteor.removeEventListener("animationstart", handleAnimationStart);
       };
@@ -47,7 +46,7 @@ const Beam = ({
     const meteor = meteorRef.current;
     if (!meteor) return;
     meteor.style.animation = "none";
-    void meteor.offsetWidth; // This forces a reflow, restarting the animation
+    void meteor.offsetWidth;
     meteor.style.animation = "";
   };
 
@@ -56,7 +55,9 @@ const Beam = ({
       <span
         ref={meteorRef}
         className={cn(
-          "absolute z-[40] -top-4  h-[0.1rem] w-[0.1rem] rounded-[9999px] bg-blue-700 shadow-[0_0_0_1px_#ffffff10] rotate-[180deg]",
+          // FIX: Changed bg-blue-700 to bg-[#00c2cb] to match your AfyaScope Brand
+          // Also removed hardcoded 'rotate-[180deg]' since the CSS module handles rotation
+          "absolute z-[40] h-[0.1rem] w-[0.1rem] rounded-[9999px] bg-[#00c2cb] shadow-[0_0_0_1px_#ffffff10]",
           styles.meteor,
           className
         )}

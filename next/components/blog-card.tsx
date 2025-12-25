@@ -1,8 +1,6 @@
 import { Link } from "next-view-transitions";
 import React from "react";
 import { BlurImage } from "@/components/blur-image";
-import { Logo } from "./logo";
-import Image from "next/image";
 import Balancer from "react-wrap-balancer";
 import { truncate } from "@/lib/utils";
 import { format } from "date-fns";
@@ -12,56 +10,60 @@ import { Article } from "@/types/types";
 export const BlogCard = ({ article, locale }: { article: Article, locale: string }) => {
   return (
     <Link
-      className="shadow-derek grid grid-cols-1 md:grid-cols-2  rounded-3xl group border border-transparent hover:border-neutral-800 w-full hover:bg-neutral-900  overflow-hidden  hover:scale-[1.02] transition duration-200"
+      className="group grid grid-cols-1 md:grid-cols-2 rounded-2xl border border-white/10 bg-neutral-900 overflow-hidden hover:scale-[1.01] transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/20 hover:border-cyan-500/30"
       href={`/${locale}/blog/${article.slug}`}
     >
-      <div className="">
+      {/* Image Section */}
+      <div className="relative h-64 md:h-full w-full overflow-hidden">
         {article.image ? (
           <BlurImage
             src={strapiImage(article.image.url)}
             alt={article.title}
             height="1200"
             width="1200"
-            className="h-full object-cover object-top w-full rounded-3xl"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="h-full flex items-center justify-center group-hover:bg-neutral-900">
-            {/* <Logo /> */}
+          <div className="h-full w-full flex items-center justify-center bg-neutral-800">
+            <span className="text-neutral-500 text-sm">No Image</span>
           </div>
         )}
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/80 to-transparent md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-neutral-900/50" />
       </div>
-      <div className="p-4 md:p-8 group-hover:bg-neutral-900 flex flex-col justify-between">
+
+      {/* Content Section */}
+      <div className="p-6 md:p-8 flex flex-col justify-between h-full">
         <div>
-          <div className="flex gap-4 flex-wrap mb-4">
+          {/* Categories */}
+          <div className="flex gap-2 flex-wrap mb-6">
             {article.categories?.map((category, idx) => (
-              <p
+              <span
                 key={`category-${idx}`}
-                className="text-xs font-bold text-muted px-4 py-2 rounded-full bg-neutral-800 capitalize"
+                className="bg-cyan-950/30 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide"
               >
                 {category.name}
-              </p>
+              </span>
             ))}
           </div>
-          <p className="text-lg md:text-4xl font-bold mb-4">
+
+          {/* Title */}
+          <h2 className="text-xl md:text-3xl font-bold mb-4 text-white font-primary group-hover:text-cyan-400 transition-colors">
             <Balancer>{article.title}</Balancer>
-          </p>
-          <p className="text-left text-base md:text-xl mt-2 text-muted">
-            {truncate(article.description, 500)}
+          </h2>
+
+          {/* Description */}
+          <p className="text-left text-sm md:text-base text-neutral-400 font-secondary leading-relaxed line-clamp-3">
+            {truncate(article.description, 200)}
           </p>
         </div>
-        <div className="flex space-x-2 items-center  mt-6">
-          {/* <Image
-            src={article.authorAvatar}
-            alt={article.author}
-            width={20}
-            height={20}
-            className="rounded-full h-5 w-5"
-          /> */}
-          {/* <p className="text-sm font-normal text-muted">{article.author}</p> */}
-          <div className="h-1 w-1 bg-neutral-300 rounded-full"></div>
-          <p className="text-neutral-300 text-sm  max-w-xl group-hover:text-white transition duration-200">
+
+        {/* Footer / Date */}
+        <div className="flex items-center mt-6 pt-6 border-t border-white/5">
+          <div className="h-1.5 w-1.5 bg-cyan-500 rounded-full mr-3"></div>
+          <time className="text-neutral-400 text-sm font-medium">
             {format(new Date(article.publishedAt), "MMMM dd, yyyy")}
-          </p>
+          </time>
         </div>
       </div>
     </Link>
@@ -71,56 +73,59 @@ export const BlogCard = ({ article, locale }: { article: Article, locale: string
 export const BlogCardVertical = ({ article, locale }: { article: Article, locale: string }) => {
   return (
     <Link
-      className="shadow-derek   rounded-3xl group border border-transparent hover:border-neutral-800 w-full hover:bg-neutral-900  overflow-hidden  hover:scale-[1.02] transition duration-200"
+      className="group flex flex-col h-full rounded-2xl border border-white/10 bg-neutral-900 overflow-hidden hover:-translate-y-1 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-900/20 hover:border-cyan-500/30"
       href={`/${locale}/blog/${article.slug}`}
     >
-      <div className="">
+      {/* Image Section */}
+      <div className="relative h-64 w-full overflow-hidden">
         {article.image ? (
           <BlurImage
             src={strapiImage(article.image.url || "")}
             alt={article.title}
             height="800"
             width="800"
-            className=" h-64 md:h-96 object-cover object-top w-full rounded-3xl"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className=" h-64 md:h-96 flex items-center justify-center group-hover:bg-neutral-900">
-            {/* <Logo /> */}
+          <div className="h-full w-full flex items-center justify-center bg-neutral-800">
+             <span className="text-neutral-500 text-sm">No Image</span>
           </div>
         )}
+        {/* Overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent opacity-60" />
       </div>
-      <div className="p-4 md:p-8 group-hover:bg-neutral-900 flex flex-col justify-between">
-        <div>
-          <div className="flex gap-4 flex-wrap mb-4">
-            {article.categories?.map((category, idx) => (
-              <p
-                key={`category-${idx}`}
-                className="text-xs font-bold text-muted px-4 py-2 rounded-full bg-neutral-800 capitalize"
-              >
-                {category.name}
-              </p>
-            ))}
-          </div>
-          <p className="text-lg md:text-xl font-bold mb-4">
-            <Balancer>{article.title}</Balancer>
-          </p>
-          <p className="text-left text-sm md:text-base mt-2 text-muted">
-            {truncate(article.description, 500)}
-          </p>
+
+      {/* Content Section */}
+      <div className="p-6 flex flex-col flex-grow">
+        
+        {/* Categories */}
+        <div className="flex gap-2 flex-wrap mb-4">
+          {article.categories?.map((category, idx) => (
+            <span
+              key={`category-${idx}`}
+              className="bg-cyan-950/30 text-cyan-400 border border-cyan-500/20 px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide"
+            >
+              {category.name}
+            </span>
+          ))}
         </div>
-        <div className="flex space-x-2 items-center  mt-6">
-          {/* <Image
-            src={article.authorAvatar}
-            alt={article.author}
-            width={20}
-            height={20}
-            className="rounded-full h-5 w-5"
-          />
-          <p className="text-sm font-normal text-muted">{article.author}</p> */}
-          <div className="h-1 w-1 bg-neutral-300 rounded-full"></div>
-          <p className="text-neutral-300 text-sm  max-w-xl group-hover:text-white transition duration-200">
-            {format(new Date(article.publishedAt), "MMMM dd, yyyy")}
-          </p>
+
+        {/* Title */}
+        <h3 className="text-lg md:text-xl font-bold mb-3 text-white font-primary leading-tight group-hover:text-cyan-400 transition-colors">
+          <Balancer>{article.title}</Balancer>
+        </h3>
+
+        {/* Description */}
+        <p className="text-sm text-neutral-400 font-secondary leading-relaxed line-clamp-3 mb-6">
+          {truncate(article.description, 150)}
+        </p>
+
+        {/* Footer / Date (Pushed to bottom) */}
+        <div className="mt-auto flex items-center pt-4 border-t border-white/5">
+          <div className="h-1.5 w-1.5 bg-cyan-500 rounded-full mr-2"></div>
+          <time className="text-neutral-500 text-xs font-medium uppercase tracking-wider">
+            {format(new Date(article.publishedAt), "MMM dd, yyyy")}
+          </time>
         </div>
       </div>
     </Link>

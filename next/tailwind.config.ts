@@ -11,6 +11,7 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       // 1. DEFINING YOUR FONTS (Matches Brand Guidelines)
@@ -74,6 +75,19 @@ const config: Config = {
     require("tailwindcss-animate"),
     require("@tailwindcss/typography"),
     addVariablesForColors,
+    // --- NEW: Scrollbar Hide Plugin ---
+    function ({ addUtilities }: any) {
+      addUtilities({
+        '.no-scrollbar::-webkit-scrollbar': {
+          'display': 'none',
+        },
+        '.no-scrollbar': {
+          '-ms-overflow-style': 'none',  /* IE and Edge */
+          'scrollbar-width': 'none',  /* Firefox */
+        },
+      });
+    },
+    // --- Existing Pattern Plugin ---
     function ({ matchUtilities, theme }: any) {
       matchUtilities(
         {

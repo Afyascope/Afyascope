@@ -1,18 +1,26 @@
 "use client";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
+import Image, { ImageProps } from "next/image"; // Import ImageProps for better typing
 import React, { useState } from "react";
 
-export const BlurImage = (props: React.ComponentProps<typeof Image>) => {
+export const BlurImage = ({
+  height,
+  width,
+  src,
+  className,
+  alt,
+  ...rest
+}: ImageProps) => {
   const [isLoading, setLoading] = useState(true);
 
-  const { src, width, height, alt, layout, ...rest } = props;
   return (
     <Image
       className={cn(
         "transition duration-300",
-        isLoading ? "blur-sm" : "blur-0",
-        props.className
+        // When loading: blur and slightly scale down (optional, looks smoother)
+        // When loaded: remove blur
+        isLoading ? "blur-sm scale-105" : "blur-0 scale-100",
+        className
       )}
       onLoad={() => setLoading(false)}
       src={src}
@@ -20,9 +28,8 @@ export const BlurImage = (props: React.ComponentProps<typeof Image>) => {
       height={height}
       loading="lazy"
       decoding="async"
-      blurDataURL={src as string}
-      layout={layout}
-      alt={alt ? alt : "Avatar"}
+      // Remove blurDataURL unless you have a specific base64 string
+      alt={alt || "Background of a beautiful view"}
       {...rest}
     />
   );

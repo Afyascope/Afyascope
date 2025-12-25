@@ -18,76 +18,105 @@ export async function BlogLayout({
 }) {
 
   return (
-    <Container className="mt-16 lg:mt-32">
-      <div className="flex justify-between items-center px-2 py-8">
-        <Link href="/blog" className="flex space-x-2 items-center">
-          <IconArrowLeft className="w-4 h-4 text-muted" />
-          <span className="text-sm text-muted">Back</span>
+    <Container className="mt-20 lg:mt-32 mb-20">
+      
+      {/* Navigation */}
+      <div className="flex justify-between items-center py-8">
+        <Link 
+          href="/blog" 
+          className="group flex space-x-2 items-center text-neutral-400 hover:text-cyan-400 transition-colors"
+        >
+          <IconArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <span className="text-sm font-medium">Back to Articles</span>
         </Link>
       </div>
-      <div className="w-full mx-auto">
+
+      {/* Main Banner Image */}
+      <div className="w-full mx-auto mb-10">
         {article.image ? (
-          <Image
-            src={strapiImage(article.image.url)}
-            height="800"
-            width="800"
-            className="h-40 md:h-96 w-full aspect-square object-cover rounded-3xl [mask-image:radial-gradient(circle,white,transparent)]"
-            alt={article.title}
-          />
+          <div className="relative w-full aspect-video md:h-[500px] rounded-2xl overflow-hidden border border-white/10 bg-neutral-900 shadow-2xl">
+            <Image
+              src={strapiImage(article.image.url)}
+              fill
+              className="object-cover"
+              alt={article.title}
+              priority
+            />
+            {/* Subtle Gradient Overlay for depth */}
+            <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/60 to-transparent" />
+          </div>
         ) : (
-          <div className="h-40 md:h-96 w-full aspect-squace rounded-3xl shadow-derek bg-neutral-900 flex items-center justify-center">
-            {/* <Logo /> */}
+          <div className="h-64 md:h-96 w-full rounded-2xl border border-white/10 bg-neutral-900 flex items-center justify-center">
+             <span className="text-neutral-700">No Cover Image</span>
           </div>
         )}
       </div>
+
       <div className="xl:relative">
-        <div className="mx-auto max-w-2xl">
-          <article className="pb-8 pt-8">
-            <div className="flex gap-4 flex-wrap ">
+        <div className="mx-auto max-w-3xl">
+          <article className="pb-8">
+            
+            {/* Categories */}
+            <div className="flex gap-3 flex-wrap mb-6">
               {article.categories?.map((category, idx) => (
-                <p
+                <span
                   key={`category-${idx}`}
-                  className="text-xs font-bold text-muted px-2 py-1 rounded-full bg-neutral-800 capitalize"
+                  className="text-xs font-bold text-cyan-400 px-3 py-1 rounded-full bg-cyan-950/30 border border-cyan-500/20 uppercase tracking-wide"
                 >
                   {category.name}
-                </p>
+                </span>
               ))}
             </div>
-            <header className="flex flex-col">
-              <h1 className="mt-8 text-4xl font-bold tracking-tight text-neutral-200 sm:text-5xl ">
+
+            {/* Title */}
+            <header className="flex flex-col mb-8">
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white font-primary leading-tight">
                 {article.title}
               </h1>
             </header>
-            <div className="mt-8 prose prose-sm prose-invert">
+
+            {/* Content (Prose) */}
+            <div className="prose prose-lg prose-invert prose-headings:font-primary prose-a:text-cyan-400 prose-img:rounded-xl">
               {children}
             </div>
-            <div className="flex space-x-2 items-center pt-12 border-t border-neutral-800 mt-12">
-              <div className="flex space-x-2 items-center ">
-                {/* <Image
-                  src={article.authorAvatar}
-                  alt={article.author}
-                  width={20}
-                  height={20}
-                  className="rounded-full h-5 w-5"
-                />
-                <p className="text-sm font-normal text-muted">
-                  {article.author}
-                </p> */}
-              </div>
-              <div className="h-5 rounded-lg w-0.5 bg-neutral-700" />
+
+            {/* Footer / Meta Data */}
+            <div className="flex space-x-4 items-center pt-8 border-t border-white/10 mt-12">
               <time
                 dateTime={article.publishedAt}
-                className="flex items-center text-base "
+                className="flex items-center text-sm text-neutral-400"
               >
-                <span className="text-muted text-sm">
-                  {format(new Date(article.publishedAt), "MMMM dd, yyyy")}
-                </span>
+                Published on {format(new Date(article.publishedAt), "MMMM dd, yyyy")}
               </time>
+              
+              {/* Optional: Divider if you add author later */}
+              {/* <div className="h-4 w-px bg-neutral-700" /> */}
+
+              {/* Author Section (Ready for use) */}
+              {/* <div className="flex space-x-2 items-center">
+                <Image
+                  src={article.authorAvatar || "/placeholder-avatar.jpg"}
+                  alt={article.author}
+                  width={24}
+                  height={24}
+                  className="rounded-full bg-neutral-800"
+                />
+                <p className="text-sm font-medium text-neutral-300">
+                  {article.author}
+                </p> 
+              </div> */}
             </div>
+
           </article>
         </div>
       </div>
-      {article?.dynamic_zone && (<DynamicZoneManager dynamicZone={article?.dynamic_zone} locale={locale} />)}
+
+      {/* Dynamic Zone Components */}
+      {article?.dynamic_zone && (
+        <div className="mt-12">
+          <DynamicZoneManager dynamicZone={article?.dynamic_zone} locale={locale} />
+        </div>
+      )}
     </Container>
   );
 }

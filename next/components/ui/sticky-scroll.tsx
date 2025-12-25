@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
-import { useScroll, useTransform } from "framer-motion";
-import { motion } from "framer-motion";
+import { useScroll, useTransform, motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export const StickyScroll = ({
   content,
@@ -10,16 +10,17 @@ export const StickyScroll = ({
     title: string;
     description: string;
     icon?: React.ReactNode;
+    content?: React.ReactNode; // Added content to type definition
   }[];
 }) => {
   return (
-    <div className="py-4 md:py-20">
-      <motion.div className="hidden lg:flex h-full  flex-col max-w-7xl mx-auto justify-between relative   p-10 ">
+    <div className="py-4 md:py-20 relative">
+      <motion.div className="hidden lg:flex h-full flex-col max-w-7xl mx-auto justify-between relative p-10">
         {content.map((item, index) => (
           <ScrollContent key={item.title + index} item={item} index={index} />
         ))}
       </motion.div>
-      <motion.div className="flex lg:hidden  flex-col max-w-7xl mx-auto justify-between relative  p-10 ">
+      <motion.div className="flex lg:hidden flex-col max-w-7xl mx-auto justify-between relative p-10">
         {content.map((item, index) => (
           <ScrollContentMobile
             key={item.title + index}
@@ -70,7 +71,7 @@ export const ScrollContent = ({
         duration: 0.3,
       }}
       key={item.title + index}
-      className="my-40  relative grid grid-cols-2 gap-8"
+      className="my-40 relative grid grid-cols-2 gap-12" // Increased gap for better spacing
     >
       <motion.div
         key={item.title + index}
@@ -78,11 +79,11 @@ export const ScrollContent = ({
           y: translate,
           opacity: opacity,
         }}
-        className="h-full w-full rounded-md  self-start "
+        className="h-full w-full rounded-md self-start"
       >
         {item.content && item.content}
       </motion.div>
-      <div className="w-full ">
+      <div className="w-full">
         <motion.div
           style={{
             y: translateContent,
@@ -90,12 +91,16 @@ export const ScrollContent = ({
           }}
           className=""
         >
-          <div>{item.icon}</div>
-          <motion.h2 className="max-w-md mt-2 font-bold text-2xl lg:text-4xl inline-block bg-clip-text text-left text-transparent bg-gradient-to-b from-white  to-white">
+          {/* Icon Wrapper with Cyan Glow */}
+          <div className="mb-4 text-[#00c2cb] drop-shadow-[0_0_10px_rgba(0,194,203,0.3)]">
+            {item.icon}
+          </div>
+
+          <motion.h2 className="max-w-md mt-2 font-bold text-2xl lg:text-4xl text-white">
             {item.title}
           </motion.h2>
 
-          <motion.p className="text-lg text-neutral-500 font-regular max-w-sm mt-2">
+          <motion.p className="text-lg text-neutral-300 font-normal max-w-sm mt-4 leading-relaxed">
             {item.description}
           </motion.p>
         </motion.div>
@@ -122,22 +127,23 @@ export const ScrollContentMobile = ({
         duration: 0.3,
       }}
       key={item.title + index}
-      className="my-10  relative flex flex-col md:flex-row md:space-x-4"
+      className="my-10 relative flex flex-col md:flex-row md:space-x-4"
     >
       <motion.div
         key={item.title + index}
-        className="w-full rounded-md  self-start mb-8"
+        className="w-full rounded-md self-start mb-8"
       >
         {item.content && item.content}
       </motion.div>
       <div className="w-full">
-        <motion.div className=" mb-6">
-          <div>{item.icon}</div>
-          <motion.h2 className="mt-2 font-bold text-2xl lg:text-4xl inline-block bg-clip-text text-left text-transparent bg-gradient-to-b from-white  to-white">
+        <motion.div className="mb-6">
+          <div className="mb-2 text-[#00c2cb]">{item.icon}</div>
+          
+          <motion.h2 className="mt-2 font-bold text-2xl lg:text-4xl text-white">
             {item.title}
           </motion.h2>
 
-          <motion.p className="text-sm md:text-base text-neutral-500 font-bold max-w-sm mt-2">
+          <motion.p className="text-sm md:text-base text-neutral-300 font-normal max-w-sm mt-4 leading-relaxed">
             {item.description}
           </motion.p>
         </motion.div>

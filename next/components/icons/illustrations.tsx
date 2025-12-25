@@ -1,26 +1,30 @@
 import React from "react";
 
-export const MetaIcon = ({ className }: { className?: string }) => {
+// Helper type for SVG props
+type IconProps = React.SVGProps<SVGSVGElement>;
+
+export const MetaIcon = ({ className, ...props }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 18 18"
       className={className}
+      {...props}
     >
-      <g clipPath="url(#a)">
-        <path fill="url(#b)" d="M0 0h18v18H0V0Z" />
+      <g clipPath="url(#meta_clip_a)">
+        <path fill="url(#meta_grad_b)" d="M0 0h18v18H0V0Z" />
         <path
           fill="#F0F3FA"
           d="M11.612 5.2c-.984 0-1.753.743-2.45 1.688C8.205 5.666 7.406 5.2 6.448 5.2 4.496 5.2 3 7.749 3 10.447c0 1.688.814 2.753 2.178 2.753.981 0 1.687-.464 2.942-2.665l.883-1.565c.126.204.258.424.398.66l.589.993c1.146 1.924 1.784 2.577 2.942 2.577 1.329 0 2.068-1.08 2.068-2.802C15 7.573 13.47 5.2 11.612 5.2ZM7.163 9.94c-1.017 1.6-1.37 1.958-1.936 1.958-.583 0-.93-.514-.93-1.43 0-1.958.974-3.96 2.134-3.96.629 0 1.154.363 1.958 1.518A165.377 165.377 0 0 0 7.163 9.94Zm3.84-.202-.704-1.177a25.45 25.45 0 0 0-.548-.858c.634-.981 1.157-1.471 1.779-1.471 1.292 0 2.326 1.909 2.326 4.254 0 .893-.292 1.412-.896 1.412-.58 0-.857-.384-1.957-2.16Z"
         />
         <path
-          fill="url(#c)"
+          fill="url(#meta_grad_c)"
           fillRule="evenodd"
           d="m9 8.975-.61-.948c-.409.63-.809 1.253-1.003 1.56l.81.81L9 8.975Z"
           clipRule="evenodd"
         />
         <path
-          fill="url(#d)"
+          fill="url(#meta_grad_d)"
           fillRule="evenodd"
           d="M10.904 6.412c-.405.222-.845.82-1.155 1.293l-.586-.818c.44-.599.906-1.108 1.43-1.405l.311.93Z"
           clipRule="evenodd"
@@ -28,7 +32,7 @@ export const MetaIcon = ({ className }: { className?: string }) => {
       </g>
       <defs>
         <linearGradient
-          id="b"
+          id="meta_grad_b"
           x1="9.281"
           x2="9.281"
           y1="16"
@@ -39,7 +43,7 @@ export const MetaIcon = ({ className }: { className?: string }) => {
           <stop offset="1" stopColor="#0081FA" />
         </linearGradient>
         <linearGradient
-          id="c"
+          id="meta_grad_c"
           x1="8.719"
           x2="7.757"
           y1="8.561"
@@ -50,7 +54,7 @@ export const MetaIcon = ({ className }: { className?: string }) => {
           <stop offset="1" stopOpacity="0" />
         </linearGradient>
         <linearGradient
-          id="d"
+          id="meta_grad_d"
           x1="9.489"
           x2="10.592"
           y1="7.168"
@@ -60,7 +64,7 @@ export const MetaIcon = ({ className }: { className?: string }) => {
           <stop stopOpacity=".1" />
           <stop offset="1" stopOpacity="0" />
         </linearGradient>
-        <clipPath id="a">
+        <clipPath id="meta_clip_a">
           <path fill="#fff" d="M0 0h18v18H0z" />
         </clipPath>
       </defs>
@@ -68,19 +72,19 @@ export const MetaIcon = ({ className }: { className?: string }) => {
   );
 };
 
-export const LinkedInIcon = () => {
+export const LinkedInIcon = ({ className, ...props }: IconProps) => {
   return (
     <svg
       viewBox="0 0 256 256"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-full"
+      className={className}
+      {...props}
     >
       <g fill="none">
         <path
           d="M0 18.338C0 8.216 8.474 0 18.92 0h218.16C247.53 0 256 8.216 256 18.338v219.327C256 247.79 247.53 256 237.08 256H18.92C8.475 256 0 247.791 0 237.668V18.335z"
-          fill="#069"
+          fill="#0077b5"
         />
-
         <path
           d="M77.796 214.238V98.986H39.488v115.252H77.8zM58.65 83.253c13.356 0 21.671-8.85 21.671-19.91-.25-11.312-8.315-19.915-21.417-19.915-13.111 0-21.674 8.603-21.674 19.914 0 11.06 8.312 19.91 21.169 19.91h.248zM99 214.238h38.305v-64.355c0-3.44.25-6.889 1.262-9.346 2.768-6.885 9.071-14.012 19.656-14.012 13.858 0 19.405 10.568 19.405 26.063v61.65h38.304v-66.082c0-35.399-18.896-51.872-44.099-51.872-20.663 0-29.738 11.549-34.78 19.415h.255V98.99H99.002c.5 10.812-.003 115.252-.003 115.252z"
           fill="#ffffff"
@@ -90,30 +94,28 @@ export const LinkedInIcon = () => {
   );
 };
 
-export const SlackIcon = () => {
+export const SlackIcon = ({ className, ...props }: IconProps) => {
   return (
     <svg
       viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
-      className="w-full h-full"
+      className={className}
+      {...props}
     >
       <g fillRule="evenodd" clipRule="evenodd">
         <path
           fill="#E01E5A"
           d="M2.471 11.318a1.474 1.474 0 001.47-1.471v-1.47h-1.47A1.474 1.474 0 001 9.846c.001.811.659 1.469 1.47 1.47zm3.682-2.942a1.474 1.474 0 00-1.47 1.471v3.683c.002.811.66 1.468 1.47 1.47a1.474 1.474 0 001.47-1.47V9.846a1.474 1.474 0 00-1.47-1.47z"
         />
-
         <path
           fill="#36C5F0"
           d="M4.683 2.471c.001.811.659 1.469 1.47 1.47h1.47v-1.47A1.474 1.474 0 006.154 1a1.474 1.474 0 00-1.47 1.47zm2.94 3.682a1.474 1.474 0 00-1.47-1.47H2.47A1.474 1.474 0 001 6.153c.002.812.66 1.469 1.47 1.47h3.684a1.474 1.474 0 001.47-1.47z"
         />
-
         <path
           fill="#2EB67D"
           d="M9.847 7.624a1.474 1.474 0 001.47-1.47V2.47A1.474 1.474 0 009.848 1a1.474 1.474 0 00-1.47 1.47v3.684c.002.81.659 1.468 1.47 1.47zm3.682-2.941a1.474 1.474 0 00-1.47 1.47v1.47h1.47A1.474 1.474 0 0015 6.154a1.474 1.474 0 00-1.47-1.47z"
         />
-
         <path
           fill="#ECB22E"
           d="M8.377 9.847c.002.811.659 1.469 1.47 1.47h3.683A1.474 1.474 0 0015 9.848a1.474 1.474 0 00-1.47-1.47H9.847a1.474 1.474 0 00-1.47 1.47zm2.94 3.682a1.474 1.474 0 00-1.47-1.47h-1.47v1.47c.002.812.659 1.469 1.47 1.47a1.474 1.474 0 001.47-1.47z"
@@ -123,16 +125,16 @@ export const SlackIcon = () => {
   );
 };
 
-export const InstagramIcon = () => {
+export const InstagramIcon = ({ className, ...props }: IconProps) => {
   return (
-    <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
+    <svg viewBox="0 0 32 32" fill="none" className={className} {...props}>
       <rect
         x="2"
         y="2"
         width="28"
         height="28"
         rx="6"
-        fill="url(#paint0_radial_87_7153)"
+        fill="url(#insta_paint0)"
       />
       <rect
         x="2"
@@ -140,7 +142,7 @@ export const InstagramIcon = () => {
         width="28"
         height="28"
         rx="6"
-        fill="url(#paint1_radial_87_7153)"
+        fill="url(#insta_paint1)"
       />
       <rect
         x="2"
@@ -148,7 +150,7 @@ export const InstagramIcon = () => {
         width="28"
         height="28"
         rx="6"
-        fill="url(#paint2_radial_87_7153)"
+        fill="url(#insta_paint2)"
       />
       <path
         d="M23 10.5C23 11.3284 22.3284 12 21.5 12C20.6716 12 20 11.3284 20 10.5C20 9.67157 20.6716 9 21.5 9C22.3284 9 23 9.67157 23 10.5Z"
@@ -168,7 +170,7 @@ export const InstagramIcon = () => {
       />
       <defs>
         <radialGradient
-          id="paint0_radial_87_7153"
+          id="insta_paint0"
           cx="0"
           cy="0"
           r="1"
@@ -180,7 +182,7 @@ export const InstagramIcon = () => {
           <stop offset="1" stopColor="#8A3AC8" />
         </radialGradient>
         <radialGradient
-          id="paint1_radial_87_7153"
+          id="insta_paint1"
           cx="0"
           cy="0"
           r="1"
@@ -193,7 +195,7 @@ export const InstagramIcon = () => {
           <stop offset="1" stopColor="#E2425C" stopOpacity="0" />
         </radialGradient>
         <radialGradient
-          id="paint2_radial_87_7153"
+          id="insta_paint2"
           cx="0"
           cy="0"
           r="1"
@@ -209,14 +211,16 @@ export const InstagramIcon = () => {
   );
 };
 
-export const TiktokIcon = () => {
+export const TiktokIcon = ({ className, ...props }: IconProps) => {
   return (
     <svg
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-full w-full"
+      className={className}
+      {...props}
     >
+      {/* ... keeping paths same, just added props ... */}
       <path
         d="M8.45095 19.7926C8.60723 18.4987 9.1379 17.7743 10.1379 17.0317C11.5688 16.0259 13.3561 16.5948 13.3561 16.5948V13.2197C13.7907 13.2085 14.2254 13.2343 14.6551 13.2966V17.6401C14.6551 17.6401 12.8683 17.0712 11.4375 18.0775C10.438 18.8196 9.90623 19.5446 9.7505 20.8385C9.74562 21.5411 9.87747 22.4595 10.4847 23.2536C10.3345 23.1766 10.1815 23.0889 10.0256 22.9905C8.68807 22.0923 8.44444 20.7449 8.45095 19.7926ZM22.0352 6.97898C21.0509 5.90039 20.6786 4.81139 20.5441 4.04639H21.7823C21.7823 4.04639 21.5354 6.05224 23.3347 8.02482L23.3597 8.05134C22.8747 7.7463 22.43 7.38624 22.0352 6.97898ZM28 10.0369V14.293C28 14.293 26.42 14.2312 25.2507 13.9337C23.6179 13.5176 22.5685 12.8795 22.5685 12.8795C22.5685 12.8795 21.8436 12.4245 21.785 12.3928V21.1817C21.785 21.6711 21.651 22.8932 21.2424 23.9125C20.709 25.246 19.8859 26.1212 19.7345 26.3001C19.7345 26.3001 18.7334 27.4832 16.9672 28.28C15.3752 28.9987 13.9774 28.9805 13.5596 28.9987C13.5596 28.9987 11.1434 29.0944 8.96915 27.6814C8.49898 27.3699 8.06011 27.0172 7.6582 26.6277L7.66906 26.6355C9.84383 28.0485 12.2595 27.9528 12.2595 27.9528C12.6779 27.9346 14.0756 27.9528 15.6671 27.2341C17.4317 26.4374 18.4344 25.2543 18.4344 25.2543C18.5842 25.0754 19.4111 24.2001 19.9423 22.8662C20.3498 21.8474 20.4849 20.6247 20.4849 20.1354V11.3475C20.5435 11.3797 21.2679 11.8347 21.2679 11.8347C21.2679 11.8347 22.3179 12.4734 23.9506 12.8889C25.1204 13.1864 26.7 13.2483 26.7 13.2483V9.91314C27.2404 10.0343 27.7011 10.0671 28 10.0369Z"
         fill="#EE1D52"
@@ -241,12 +245,15 @@ export const TiktokIcon = () => {
   );
 };
 
-export const TwitterIcon = () => {
+export const TwitterIcon = ({ className, ...props }: IconProps) => {
   return (
-    <svg viewBox="0 -4 48 48" version="1.1" className="h-full w-full">
+    <svg
+      viewBox="0 -4 48 48"
+      version="1.1"
+      className={className}
+      {...props}
+    >
       <title>Twitter-color</title>
-      <desc>Created with Sketch.</desc>
-      <defs></defs>
       <g
         id="Icons"
         stroke="none"
@@ -269,9 +276,14 @@ export const TwitterIcon = () => {
   );
 };
 
-export const FacebookIcon = () => {
+export const FacebookIcon = ({ className, ...props }: IconProps) => {
   return (
-    <svg viewBox="0 0 48 48" version="1.1" className="h-full w-full">
+    <svg
+      viewBox="0 0 48 48"
+      version="1.1"
+      className={className}
+      {...props}
+    >
       <g
         id="Icons"
         stroke="none"
@@ -294,7 +306,7 @@ export const FacebookIcon = () => {
   );
 };
 
-export const ClaudeLogo = ({ className }: { className?: string }) => {
+export const ClaudeLogo = ({ className, ...props }: IconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -305,6 +317,7 @@ export const ClaudeLogo = ({ className }: { className?: string }) => {
       clipRule="evenodd"
       viewBox="0 0 512 512"
       className={className}
+      {...props}
     >
       <rect fill="#CC9B7A" width="512" height="512" rx="104.187" ry="105.042" />
       <path
@@ -316,7 +329,7 @@ export const ClaudeLogo = ({ className }: { className?: string }) => {
   );
 };
 
-export const OpenAILogo = ({ className }: { className?: string }) => {
+export const OpenAILogo = ({ className, ...props }: IconProps) => {
   return (
     <svg
       className={className}
@@ -324,6 +337,7 @@ export const OpenAILogo = ({ className }: { className?: string }) => {
       viewBox="0 0 28 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path
         d="M26.153 11.46a6.888 6.888 0 0 0-.608-5.73 7.117 7.117 0 0 0-3.29-2.93 7.238 7.238 0 0 0-4.41-.454 7.065 7.065 0 0 0-2.41-1.742A7.15 7.15 0 0 0 12.514 0a7.216 7.216 0 0 0-4.217 1.346 7.061 7.061 0 0 0-2.603 3.539 7.12 7.12 0 0 0-2.734 1.188A7.012 7.012 0 0 0 .966 8.268a6.979 6.979 0 0 0 .88 8.273 6.89 6.89 0 0 0 .607 5.729 7.117 7.117 0 0 0 3.29 2.93 7.238 7.238 0 0 0 4.41.454 7.061 7.061 0 0 0 2.409 1.742c.92.404 1.916.61 2.923.604a7.215 7.215 0 0 0 4.22-1.345 7.06 7.06 0 0 0 2.605-3.543 7.116 7.116 0 0 0 2.734-1.187 7.01 7.01 0 0 0 1.993-2.196 6.978 6.978 0 0 0-.884-8.27Zm-10.61 14.71c-1.412 0-2.505-.428-3.46-1.215.043-.023.119-.064.168-.094l5.65-3.22a.911.911 0 0 0 .464-.793v-7.86l2.389 1.36a.087.087 0 0 1 .046.065v6.508c0 2.952-2.491 5.248-5.257 5.248ZM4.062 21.354a5.17 5.17 0 0 1-.635-3.516c.042.025.115.07.168.1l5.65 3.22a.928.928 0 0 0 .928 0l6.898-3.93v2.72a.083.083 0 0 1-.034.072l-5.711 3.255a5.386 5.386 0 0 1-4.035.522 5.315 5.315 0 0 1-3.23-2.443ZM2.573 9.184a5.283 5.283 0 0 1 2.768-2.301V13.515a.895.895 0 0 0 .464.793l6.897 3.93-2.388 1.36a.087.087 0 0 1-.08.008L4.52 16.349a5.262 5.262 0 0 1-2.475-3.185 5.192 5.192 0 0 1 .527-3.98Zm19.623 4.506-6.898-3.93 2.388-1.36a.087.087 0 0 1 .08-.008l5.713 3.255a5.28 5.28 0 0 1 2.054 2.118 5.19 5.19 0 0 1-.488 5.608 5.314 5.314 0 0 1-2.39 1.742v-6.633a.896.896 0 0 0-.459-.792Zm2.377-3.533a7.973 7.973 0 0 0-.168-.099l-5.65-3.22a.93.93 0 0 0-.928 0l-6.898 3.93V8.046a.083.083 0 0 1 .034-.072l5.712-3.251a5.375 5.375 0 0 1 5.698.241 5.262 5.262 0 0 1 1.865 2.28c.39.92.506 1.93.335 2.913ZM9.631 15.009l-2.39-1.36a.083.083 0 0 1-.046-.065V7.075c.001-.997.29-1.973.832-2.814a5.297 5.297 0 0 1 2.231-1.935 5.382 5.382 0 0 1 5.659.72 4.89 4.89 0 0 0-.168.093l-5.65 3.22a.913.913 0 0 0-.465.793l-.003 7.857Zm1.297-2.76L14 10.5l3.072 1.75v3.5L14 17.499l-3.072-1.75v-3.5Z"
@@ -332,13 +346,14 @@ export const OpenAILogo = ({ className }: { className?: string }) => {
     </svg>
   );
 };
-export const GeminiLogo = ({ className }: { className?: string }) => {
+export const GeminiLogo = ({ className, ...props }: IconProps) => {
   return (
     <svg
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 16 16"
       className={className}
+      {...props}
     >
       <path
         d="M16 8.016A8.522 8.522 0 008.016 16h-.032A8.521 8.521 0 000 8.016v-.032A8.521 8.521 0 007.984 0h.032A8.522 8.522 0 0016 7.984v.032z"
@@ -362,7 +377,7 @@ export const GeminiLogo = ({ className }: { className?: string }) => {
   );
 };
 
-export const MetaIconOutline = ({ className }: { className?: string }) => {
+export const MetaIconOutline = ({ className, ...props }: IconProps) => {
   return (
     <svg
       id="Layer_1"
@@ -370,10 +385,11 @@ export const MetaIconOutline = ({ className }: { className?: string }) => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 287.56 191"
       className={className}
+      {...props}
     >
       <defs>
         <linearGradient
-          id="linear-gradient"
+          id="meta_outline_grad_1"
           x1="62.34"
           y1="101.45"
           x2="260.34"
@@ -387,7 +403,7 @@ export const MetaIconOutline = ({ className }: { className?: string }) => {
           <stop offset="1" stopColor="#0082fb" />
         </linearGradient>
         <linearGradient
-          id="linear-gradient-2"
+          id="meta_outline_grad_2"
           x1="41.42"
           y1="53"
           x2="41.42"
@@ -404,11 +420,11 @@ export const MetaIconOutline = ({ className }: { className?: string }) => {
         d="M31.06,126c0,11,2.41,19.41,5.56,24.51A19,19,0,0,0,53.19,160c8.1,0,15.51-2,29.79-21.76,11.44-15.83,24.92-38,34-52l15.36-23.6c10.67-16.39,23-34.61,37.18-47C181.07,5.6,193.54,0,206.09,0c21.07,0,41.14,12.21,56.5,35.11,16.81,25.08,25,56.67,25,89.27,0,19.38-3.82,33.62-10.32,44.87C271,180.13,258.72,191,238.13,191V160c17.63,0,22-16.2,22-34.74,0-26.42-6.16-55.74-19.73-76.69-9.63-14.86-22.11-23.94-35.84-23.94-14.85,0-26.8,11.2-40.23,31.17-7.14,10.61-14.47,23.54-22.7,38.13l-9.06,16c-18.2,32.27-22.81,39.62-31.91,51.75C84.74,183,71.12,191,53.19,191c-21.27,0-34.72-9.21-43-23.09C3.34,156.6,0,141.76,0,124.85Z"
       />
       <path
-        fill="url(#linear-gradient)"
+        fill="url(#meta_outline_grad_1)"
         d="M24.49,37.3C38.73,15.35,59.28,0,82.85,0c13.65,0,27.22,4,41.39,15.61,15.5,12.65,32,33.48,52.63,67.81l7.39,12.32c17.84,29.72,28,45,33.93,52.22,7.64,9.26,13,12,19.94,12,17.63,0,22-16.2,22-34.74l27.4-.86c0,19.38-3.82,33.62-10.32,44.87C271,180.13,258.72,191,238.13,191c-12.8,0-24.14-2.78-36.68-14.61-9.64-9.08-20.91-25.21-29.58-39.71L146.08,93.6c-12.94-21.62-24.81-37.74-31.68-45C107,40.71,97.51,31.23,82.35,31.23c-12.27,0-22.69,8.61-31.41,21.78Z"
       />
       <path
-        fill="url(#linear-gradient-2)"
+        fill="url(#meta_outline_grad_2)"
         d="M82.35,31.23c-12.27,0-22.69,8.61-31.41,21.78C38.61,71.62,31.06,99.34,31.06,126c0,11,2.41,19.41,5.56,24.51L10.14,167.91C3.34,156.6,0,141.76,0,124.85,0,94.1,8.44,62.05,24.49,37.3,38.73,15.35,59.28,0,82.85,0Z"
       />
     </svg>

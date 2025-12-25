@@ -5,7 +5,7 @@ import { Container } from "../container";
 import { FeatureIconContainer } from "./features/feature-icon-container";
 import { Heading } from "../elements/heading";
 import { Subheading } from "../elements/subheading";
-import { IconCheck, IconPlus, IconReceipt2 } from "@tabler/icons-react";
+import { IconCheck, IconPlus, IconBriefcase } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { Button } from "../elements/button";
 
@@ -30,19 +30,25 @@ type Plan = {
 
 export const Pricing = ({ heading, sub_heading, plans }: { heading: string, sub_heading: string, plans: any[] }) => {
   const onClick = (plan: Plan) => {
-    console.log("click", plan);
+    // Replace this with your actual booking link or WhatsApp logic
+    window.open("https://wa.me/254700000000", "_blank");
   };
+  
   return (
-    <div className="pt-40">
+    <div className="pt-20 pb-20 relative z-20">
       <Container>
-        <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
-          <IconReceipt2 className="h-6 w-6 text-white" />
+        <FeatureIconContainer className="flex justify-center items-center overflow-hidden bg-charcoal">
+          {/* Changed Icon to Briefcase for 'Services' vibe */}
+          <IconBriefcase className="h-6 w-6 text-white" />
         </FeatureIconContainer>
-        <Heading className="pt-4">{heading}</Heading>
-        <Subheading className="max-w-3xl mx-auto">
+        
+        <Heading className="pt-4 text-white">{heading}</Heading>
+        
+        <Subheading className="max-w-3xl mx-auto text-neutral-400">
           {sub_heading}
         </Subheading>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto gap-4 py-20 lg:items-start">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto gap-6 py-20 lg:items-start">
           {plans.map((plan) => (
             <Card onClick={() => onClick(plan)} key={plan.name} plan={plan} />
           ))}
@@ -56,86 +62,61 @@ const Card = ({ plan, onClick }: { plan: Plan; onClick: () => void }) => {
   return (
     <div
       className={cn(
-        "p-4 md:p-4 rounded-3xl bg-neutral-900 border-2 border-neutral-800",
-        plan.featured && "border-neutral-50 bg-neutral-100"
+        "p-4 md:p-6 rounded-3xl bg-neutral-900/50 border border-white/10 flex flex-col h-full",
+        plan.featured && "bg-white border-neutral-200"
       )}
     >
-      <div
-        className={cn(
-          "p-4 bg-neutral-800 rounded-2xl shadow-[0px_-1px_0px_0px_var(--neutral-700)]",
-          plan.featured && "bg-white shadow-aceternity"
-        )}
-      >
-        <div className="flex justify-between items-center">
-          <p className={cn("font-medium", plan.featured && "text-black")}>
+      <div className="flex-1">
+         {/* HEADER */}
+        <div className="flex justify-between items-center mb-6">
+          <p className={cn("font-bold text-xl font-primary", plan.featured ? "text-black" : "text-white")}>
             {plan.name}
           </p>
           {plan.featured && (
             <div
               className={cn(
-                "font-medium text-xs px-3 py-1 rounded-full relative bg-neutral-900"
+                "font-medium text-[10px] uppercase tracking-wider px-3 py-1 rounded-full relative bg-black text-white"
               )}
             >
-              <div className="absolute inset-x-0 bottom-0 w-3/4 mx-auto h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent"></div>
-              Featured
+              Recommended
             </div>
           )}
         </div>
-        <div className="mt-8">
-          {plan.price && (
-            <span
-              className={cn(
-                "text-lg font-bold text-neutral-500",
-                plan.featured && "text-neutral-700"
-              )}
-            >
-              $
-            </span>
-          )}
-          <span
-            className={cn("text-4xl font-bold", plan.featured && "text-black")}
-          >
-            {plan.price || plan?.CTA?.text}
-          </span>
-          {plan.price && (
-            <span
-              className={cn(
-                "text-lg font-normal text-neutral-500 ml-2",
-                plan.featured && "text-neutral-700"
-              )}
-            >
-              / launch
-            </span>
-          )}
+
+        {/* DESCRIPTION (Replaces Price) */}
+        <div className="mb-8 min-h-[80px]">
+          <p className={cn(
+             "text-sm leading-relaxed font-secondary", 
+             plan.featured ? "text-neutral-600" : "text-neutral-400"
+          )}>
+            {plan.description}
+          </p>
         </div>
+
+        {/* BUTTON */}
         <Button
           variant="outline"
           className={cn(
-            "w-full mt-10 mb-4",
-            plan.featured &&
-            "bg-black text-white hover:bg-black/80 hover:text-white"
+            "w-full mb-8 font-primary font-bold tracking-wide",
+            plan.featured 
+              ? "bg-[#FF4D4D] text-white hover:bg-[#FF4D4D]/90 border-transparent" 
+              : "bg-white/5 border-white/10 text-white hover:bg-white/10"
           )}
           onClick={onClick}
         >
-          {plan?.CTA?.text}
+          {plan?.CTA?.text || "Book Consultation"}
         </Button>
-      </div>
-      <div className="mt-1 p-4">
-        {plan.perks.map((feature, idx) => (
-          <Step featured={plan.featured} key={idx}>
-            {feature.text}
-          </Step>
-        ))}
-      </div>
-      {plan.additional_perks && plan.additional_perks.length > 0 && (
+
         <Divider featured={plan.featured} />
-      )}
-      <div className="p-4">
-        {plan.additional_perks?.map((feature, idx) => (
-          <Step featured={plan.featured} additional key={idx}>
-            {feature.text}
-          </Step>
-        ))}
+
+        {/* PERKS LIST */}
+        <div className="mt-8 flex flex-col gap-4">
+          {plan.perks.map((feature, idx) => (
+            <Step featured={plan.featured} key={idx}>
+              {feature.text}
+            </Step>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -151,19 +132,19 @@ const Step = ({
   featured?: boolean;
 }) => {
   return (
-    <div className="flex items-start justify-start gap-2 my-4">
+    <div className="flex items-start justify-start gap-3">
       <div
         className={cn(
-          "h-4 w-4 rounded-full bg-neutral-700 flex items-center justify-center flex-shrink-0 mt-0.5",
-          additional ? "bg-indigo-600" : "bg-neutral-700"
+          "h-5 w-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5",
+          featured ? "bg-indigo-100" : "bg-neutral-800"
         )}
       >
-        <IconCheck className="h-3 w-3 [stroke-width:4px] text-neutral-300" />
+        <IconCheck className={cn("h-3 w-3 [stroke-width:3px]", featured ? "text-indigo-600" : "text-neutral-400")} />
       </div>
       <div
         className={cn(
-          "font-medium text-white text-sm",
-          featured && "text-black"
+          "font-medium text-sm font-secondary leading-snug",
+          featured ? "text-neutral-700" : "text-neutral-300"
         )}
       >
         {children}
@@ -174,29 +155,10 @@ const Step = ({
 
 const Divider = ({ featured }: { featured?: boolean }) => {
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <div
-        className={cn("w-full h-px bg-neutral-950", featured && "bg-white")}
+        className={cn("w-full h-px bg-neutral-800", featured && "bg-neutral-200")}
       />
-      <div
-        className={cn(
-          "w-full h-px bg-neutral-800",
-          featured && "bg-neutral-200"
-        )}
-      />
-      <div
-        className={cn(
-          "absolute inset-0 h-5 w-5 m-auto rounded-xl bg-neutral-800 shadow-[0px_-1px_0px_0px_var(--neutral-700)] flex items-center justify-center",
-          featured && "bg-white shadow-aceternity"
-        )}
-      >
-        <IconPlus
-          className={cn(
-            "h-3 w-3 [stroke-width:4px] text-neutral-300",
-            featured && "text-black"
-          )}
-        />
-      </div>
     </div>
   );
 };

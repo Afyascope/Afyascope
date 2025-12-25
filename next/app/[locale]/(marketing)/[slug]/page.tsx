@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation'; // 1. Add this import
 import PageContent from '@/lib/shared/PageContent';
 import fetchContentType from '@/lib/strapi/fetchContentType';
 import { generateMetadataObject } from '@/lib/shared/metadata';
@@ -38,6 +39,12 @@ export default async function Page({ params }: { params: { locale: string, slug:
     true,
   );
 
+  // 2. Add this Safety Check
+  // If no page is found in Strapi, show the 404 page instead of crashing.
+  if (!pageData) {
+    return notFound();
+  }
+
   const localizedSlugs = pageData.localizations?.reduce(
     (acc: Record<string, string>, localization: any) => {
       acc[localization.locale] = localization.slug;
@@ -51,6 +58,5 @@ export default async function Page({ params }: { params: { locale: string, slug:
       <ClientSlugHandler localizedSlugs={localizedSlugs} />
       <PageContent pageData={pageData} />
     </>
-
   );
 }

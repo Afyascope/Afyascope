@@ -20,7 +20,7 @@ export const HowItWorks = ({ heading, sub_heading, steps }: { heading: string, s
         <Heading className="pt-4 font-primary text-white">
           {heading}
         </Heading>
-        
+
         <Subheading className="max-w-3xl mx-auto text-neutral-300">
           {sub_heading}
         </Subheading>
@@ -37,6 +37,6 @@ export const HowItWorks = ({ heading, sub_heading, steps }: { heading: string, s
           ))}
         </div>
       </Container>
-    </div>
+      </div>
   );
 };

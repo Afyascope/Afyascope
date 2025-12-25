@@ -1,111 +1,159 @@
-# LaunchPad - Official Strapi Demo
+# AfyaScope Digital Platform
 
-![LaunchPad](./LaunchPad.jpg)
+![AfyaScope Banner](public/uploads/logo.png)
 
-Welcome aboard **LaunchPad**, the official Strapi demo application, where we launch your content into the stratosphere at the speed of _"we-can't-even-measure-it!"_.
-This repository contains the following:
+> **Bridging the Gap Between Medicine and Code.**
+>
+> The official digital agency platform for AfyaScope, built to demonstrate high-performance web development tailored for the African healthcare sector.
 
-- A Strapi project with content-types and data already onboard
-- A Next.js client that's primed and ready to fetch the content from Strapi faster than you can say "blast off!"
+[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+[![Strapi](https://img.shields.io/badge/Strapi-v5-purple)](https://strapi.io/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.0-38bdf8)](https://tailwindcss.com/)
 
-## 🌌 Get started
+## 🏥 About The Project
 
-Strap yourself in! You can get started with this project on your local machine by following the instructions below, or you can [request a private instance on our website](https://strapi.io/demo)
+AfyaScope is a clinician-led digital health agency. This repository contains the source for a high-performance Next.js frontend designed to showcase digital health services, portfolio work, and clinical insights.
 
-## 1. Clone Launchpad
+This project prioritizes Clinical UX, high-contrast accessibility, bilingual support (English/Swahili), and a Strapi-powered headless CMS for content management.
 
-To infinity and beyond! 🚀 Clone the repo with this command:
+### Key Features
+- Dynamic Internationalization (i18n) with English (`en`) and Swahili (`sw`).
+- Headless CMS integration (Strapi v5) for pages, SEO, and site settings.
+- Draft Mode preview (token-gated) so editors can preview unpublished content.
+- Clinical design system with primary colors and accessible typography.
+- Performance-first animations (Framer Motion) and GPU-accelerated effects.
 
-```
-git clone https://github.com/strapi/launchpad.git
-```
+---
 
-- Navigate to your project folder by running `cd launchpad`.
+## 🛠️ Tech Stack
 
-## 2. Set up environment variables
+### Frontend
+- Framework: Next.js 14 (App Router)
+- Language: TypeScript
+- Styling: Tailwind CSS + CSS Modules
+- Animations: Framer Motion
 
-Before you take off, set up the required environment variables for both Strapi and Next.js.
+### Backend (CMS)
+- CMS: Strapi v5 (headless)
+- Database: PostgreSQL (production) / SQLite (dev)
 
-To create the Strapi .env file, copy the content of the `./strapi/.env.example` file into a new file named `./strapi/.env`, then modify the values to match your setup:
+---
 
-```sh
-cp ./strapi/.env.example ./strapi/.env
-```
+## 🚀 Getting Started
 
-Then do the same for the Next.js .env file, and modify it too:
+These steps help you run the frontend locally. The repository contains both the frontend (`next/`) and a Strapi backend (`strapi/`) in a monorepo layout.
 
-```sh
-cp ./next/.env.example ./next/.env
-```
+### Prerequisites
+- Node.js 18.17 or later
+- npm or yarn
+- (Optional) A running instance of Strapi if you want to fetch real CMS content
 
-## 3. Start Strapi
+### 1) Clone the repository
 
-Take a deep breath. It's time to power up the Strapi engines. Navigate to your ./my-projects/launchpad/strapi folder by running:
-
-Navigate to your `./my-projects/launchpad/strapi` folder by running `cd strapi` from your command line.
-
-- Run the following command in your `./launchpad/strapi` folder:
-
-```
-yarn && yarn seed && yarn develop
-```
-
-This will install dependencies, sprinkle in some data magic, and run the server. (You can run these commands separately, but why not be efficient?)
-
-## 4. Start Next.js
-
-We're almost ready for lift-off! Next.js is your sleek, futuristic interface for getting all that glorious content out into the world. 🚀
-
-Open a new terminal tab or window to leave Strapi running, and navigate to your `./my-projects/launchpad/next` folder by running `cd next`.
-
-- Run the following command in your `./launchpad/next` folder
-
-```
-yarn && yarn build && yarn start
+```bash
+git clone https://github.com/afyascope/afyascope-web.git
+cd afyascope-web
 ```
 
-This installs dependencies, builds your project, and starts your server. You’re now a spacefaring content master!
+### 2) Install dependencies
 
-## Features Overview ✨
+From the monorepo root (or inside `next/` if you only need the frontend):
 
-### User
+```bash
+# install with npm
+npm install
 
-<br />
+# or with yarn
+yarn install
+```
 
-**An intuitive, minimal editor** The editor allows you to pull in dynamic blocks of content. It’s 100% open-source, and it’s fully extensible.<br />
-**Media Library** Upload images, video or any files and crop and optimize their sizes, without quality loss.<br />
-**Flexible content management** Build any type of category, section, format or flow to adapt to your needs. <br />
-**Sort and Filter** Built-in sorting and filtering: you can manage thousands of entries without effort.<br />
-**User-friendly interface** The most user-friendly open-source interface on the market.<br />
-**SEO optimized** Easily manage your SEO metadata with a repeatable field and use our Media Library to add captions, notes, and custom filenames to optimize the SEO of media assets.<br /><br />
+### 3) Environment variables
 
-### Global
+Create a `.env.local` file in the project root (or `next/` if running the frontend only) with the following keys:
 
-<br />
+```bash
+# Strapi API URL (no trailing slash)
+NEXT_PUBLIC_API_URL=http://localhost:1337
 
-[Customizable API](https://strapi.io/features/customizable-api): Automatically build out the schema, models, controllers for your API from the editor. Get REST or GraphQL API out of the box without writing a single line of code.<br />
-[Media Library](https://strapi.io/features/media-library): The media library allows you to store your images, videos and files in your Strapi admin panel with many ways to visualize and manage them.<br />
-[Role-Based Access Control (RBAC)](https://strapi.io/features/custom-roles-and-permissions): Role-Based Access Control is a feature available in the Administration Panel settings that let your team members have access rights only to the information they need.<br />
-[Internationalization (i18n)](https://strapi.io/features/internationalization): Internationalization (i18n) lets you create many content versions, also called locales, in different languages and for different countries.<br />
-[Audit Logs](https://strapi.io/blog/reasons-and-best-practices-for-using-audit-logs-in-your-application)The Audit Logs section provides a searchable and filterable display of all activities performed by users of the Strapi application<br />
-[Data transfer](https://strapi.io/blog/importing-exporting-and-transferring-data-with-the-strapi-cli) Streams your data from one Strapi instance to another Strapi instance.<br />
-[Review Worfklows](https://docs.strapi.io/user-docs/settings/review-workflows) Create and manage any desired review stages for your content, enabling your team to collaborate in the content creation flow from draft to publication. <br />
+# Secure token for fetching Drafts (create via Strapi Admin -> Settings -> API Tokens)
+STRAPI_API_TOKEN=your_full_access_token_here
 
-## Resources
+# Secret used for Draft Mode URL generation
+DRAFT_SECRET=your_random_secret_string
+```
 
-[Docs](https://docs.strapi.io) • [Demo](https://strapi.io/demo) • [Forum](https://forum.strapi.io/) • [Discord](https://discord.strapi.io) • [Youtube](https://www.youtube.com/c/Strapi/featured) • [Strapi Design System](https://design-system.strapi.io/) • [Marketplace](https://market.strapi.io/) • [Cloud Free Trial](https://cloud.strapi.io)
+> Note: If you don't have a Strapi instance, the frontend contains mock/fallback data for local development.
 
-## Todo
+### 4) Run the development server
 
-- [ ] Implement the official Strapi SEO plugin
-- [ ] Implement the community Strapi preview plugin
-- [ ] Create localized content for the pricing plans and products
-- [ ] Populate creator fields when it'll work on Strapi 5 (article authors information are missing)
+From the project root (or `next/`):
 
-## Customization
+```bash
+cd next
+npm run dev
+# or
+yarn dev
+```
 
-- The Strapi application contains a custom population middleware in order to populate more data than what it is set by default. You can find it in the `./strapi/src/middlewares/deepPopulate.ts` file.
+Open http://localhost:3000 in your browser to view the site.
 
-- The Strapi application contains a postinstall script that will regenerate an uuid for the project in order to get some anonymous usage information concerning this demo. You can disable it by removing the uuid inside the `./strapi/packages.json` file.
+---
 
-- The Strapi application contains a patch for the @strapi/admin package. It is only necessary for the hosted demos since we automatically create the Super Admin users for them when they request this demo on our website.
+## 📂 Project Structure
+
+```
+├── app/                    # Next.js App Router pages & layouts
+├── components/             # React components (shared, dynamic zones, UI)
+├── lib/                    # Helpers, Strapi fetch utilities
+├── next/                   # Next.js frontend (app code) — run from here
+├── strapi/                 # Strapi backend (admin, API) — optional
+└── public/                 # Static assets
+```
+
+## 🧠 Content modeling (Strapi)
+
+The frontend expects the following single and collection types in Strapi:
+
+- Global (single type): navbar, footer, favicon, default SEO
+- Pages (collection): title, slug, content (dynamic zone), seo (component). Localization enabled.
+- Projects, Team, etc. (collection types used for portfolio and team sections)
+
+## 🎨 Theming & Design system
+
+Primary brand tokens used in the Tailwind config:
+
+- AfyaScope Navy (Base): `#001f3f` — main backgrounds, footer
+- Cyan (Accent): `#00c2cb` — buttons, hovers, beam effects
+- Clinical White: `#F0F3FA` — primary text and icons
+- Slate: `#64748b` — subheadings, borders
+
+---
+
+## �� Contributing
+
+Contributions are welcome. Suggested workflow:
+
+```bash
+git checkout -b feature/YourFeature
+git commit -m "Add your feature"
+git push origin feature/YourFeature
+# Open a pull request on GitHub
+```
+
+Please follow the repo's code style and add tests where appropriate.
+
+---
+
+## 📞 Contact
+
+Eric Musanyi — Lead Clinician & Developer
+
+- Website: https://www.afyascope.co.ke
+- Twitter: @afyascope
+- Email: hello@afyascope.co.ke
+
+If you'd like, I can also:
+
+- Add a short troubleshooting/development section (how to run Strapi + seed data).
+- Add badges that show build/test status for CI if you have a CI provider configured.

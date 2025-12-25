@@ -4,7 +4,7 @@ import { LinkProps } from "next/link";
 
 interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   variant?: "simple" | "outline" | "primary" | "muted";
-  as?: React.ElementType;
+  as?: any; // Changed to any to accept Link component easily
   className?: string;
   children?: React.ReactNode;
   href?: LinkProps["href"];
@@ -18,26 +18,29 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const variantClass =
-    variant === "simple"
-      ? /* Simple: Transparent -> Hover adds subtle Red Tint */
-        "bg-transparent text-white hover:text-secondary border border-transparent hover:bg-white/5 transition duration-200"
-      : variant === "outline"
-      ? /* Outline: Glass Style (White Border) -> Hover fills White */
-        "bg-transparent border border-white/20 text-white hover:bg-white hover:text-charcoal hover:border-white transition duration-200"
-      : variant === "primary"
-      ? /* Primary: Coral Red Background + White Text */
-        "bg-secondary border border-secondary text-white shadow-[0px_-1px_0px_0px_#FFFFFF40_inset,_0px_1px_0px_0px_#FFFFFF40_inset] hover:bg-secondary/90 hover:-translate-y-1 active:-translate-y-0"
-      : variant === "muted"
-      ? /* Muted: Slate Navy Background */
-        "bg-neutral-800 border border-transparent text-neutral-300 hover:bg-neutral-700 hover:text-white transition duration-200"
-      : "";
+  
+  const variants = {
+    // 1. SIMPLE: The one you want. No background, Cyan Text. 
+    // Removed 'text-secondary' (Red) and replaced with 'text-cyan-400'.
+    simple: "bg-transparent text-cyan-400 hover:text-cyan-300 border-none shadow-none hover:bg-cyan-950/30 px-0 md:px-4",
+
+    // 2. PRIMARY: Updated to White/Black (AfyaScope Brand)
+    // Removed 'bg-secondary' (Red).
+    primary: "bg-white text-black border border-white hover:bg-neutral-200 shadow-[0px_4px_10px_rgba(0,0,0,0.2)] hover:-translate-y-0.5",
+
+    // 3. OUTLINE: Glassy look
+    outline: "bg-transparent border border-white/20 text-white hover:bg-white hover:text-black hover:border-white",
+
+    // 4. MUTED: Dark Grey for secondary actions
+    muted: "bg-neutral-800 border border-transparent text-neutral-300 hover:bg-neutral-700 hover:text-white",
+  };
 
   return (
     <Tag
       className={cn(
-        "relative z-10 text-sm md:text-sm font-primary font-bold rounded-md px-4 py-2 flex items-center justify-center transition-all duration-200",
-        variantClass,
+        // Base Styles (Rounded-xl looks more modern than rounded-md)
+        "relative z-10 text-sm md:text-sm font-bold rounded-xl px-6 py-3 flex items-center justify-center transition-all duration-200 cursor-pointer",
+        variants[variant] || variants.primary, // Fallback to primary if variant is typo'd
         className
       )}
       {...props}
