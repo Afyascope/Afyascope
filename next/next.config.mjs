@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 1. NEW: Ignore strict linting rules so the build finishes
+  // 1. FORCE SUCCESS: Ignore all linting/type errors during deployment
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -8,7 +8,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
-  // 2. IMAGES: Added a wildcard (**) to allow images from Strapi Cloud/Cloudinary
+  // 2. IMAGES: Keep your Strapi/HostPinnacle image settings
   images: {
     remotePatterns: [
       { 
@@ -16,22 +16,22 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "**", // Allows external images from any domain
+        hostname: "**", // Allows images from any domain (Strapi Cloud, etc)
       },
     ],
   },
 
   pageExtensions: ["ts", "tsx"],
 
-  // 3. YOUR EXISTING REDIRECT LOGIC
+  // 3. REDIRECTS: Keep your dynamic redirect logic
   async redirects() {
     let redirections = [];
     try {
-      // Note: This requires the API to be online during the build
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/redirections`
       );
-      if (!res.ok) throw new Error("API not reachable");
+      // If API is down during build, don't crash the whole deploy
+      if (!res.ok) return [];
       
       const result = await res.json();
       const redirectItems = result.data.map(({ source, destination }) => {
@@ -45,8 +45,8 @@ const nextConfig = {
       redirections = redirections.concat(redirectItems);
       return redirections;
     } catch (error) {
-      // If API fails (common during build), return empty list so build doesn't crash
-      console.warn("Could not fetch redirects during build:", error.message);
+      // Return empty array if Strapi is unreachable during build
+      console.warn("Could not fetch redirects during build, skipping...");
       return [];
     }
   },
