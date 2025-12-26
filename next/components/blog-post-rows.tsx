@@ -45,7 +45,6 @@ export const BlogPostRows = ({ articles }: { articles: Article[] }) => {
       <div className="divide-y divide-white/5">
         {results.length === 0 ? (
           <div className="py-12 text-center bg-neutral-900/50 rounded-xl border border-dashed border-white/10">
-            {/* FIX: Replaced " with &quot; to fix the build error */}
             <p className="text-neutral-400">No articles found matching &quot;{search}&quot;</p>
           </div>
         ) : (

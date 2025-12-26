@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { Heading } from "../elements/heading";
 import { Subheading } from "../elements/subheading";
@@ -9,7 +9,8 @@ import { strapiImage } from "@/lib/strapi/strapiImage";
 export const Brands = ({ heading, sub_heading, logos }: { heading: string, sub_heading: string, logos: any[] }) => {
   
   // 1. Initial Logic to split logos
-  const safeLogos = Array.isArray(logos) ? logos : [];
+  // Memoize the derived array so its reference is stable and can be used safely in effect deps.
+  const safeLogos = useMemo(() => (Array.isArray(logos) ? logos : []), [logos]);
   
   // 2. State setup
   // We initialize state lazily or with default empty/split to prevent hydration mismatch if possible,
@@ -28,11 +29,7 @@ export const Brands = ({ heading, sub_heading, logos }: { heading: string, sub_h
     const second = safeLogos.slice(mid);
     setLogos([first, second]);
     setActiveLogoSet(first);
-    
-    // FIX: We disable the warning here because 'safeLogos' is derived from 'logos'.
-    // Adding 'safeLogos' to the array would cause an infinite loop.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [logos]); 
+  }, [safeLogos]); 
 
   // 4. The Flip Logic
   useEffect(() => {
