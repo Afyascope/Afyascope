@@ -25,6 +25,7 @@
     "@strapi/strapi": "5.17.0",
     "better-sqlite3": "11.7.0",
     "patch-package": "^8.0.0",
+    "pg": "^8.17.2",
     "pluralize": "^8.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
